@@ -1,0 +1,37 @@
+{
+  "version": "v5.20.0",
+  "published_at": "2026-01-20T21:07:24Z",
+  "total_detections": 1978,
+  "last_updated": "2026-01-23T14:41:36.244675+00:00",
+  "source": "https://github.com/splunk/security_content",
+  "by_category": {
+    "application": 108,
+    "endpoint": 1361,
+    "cloud": 321,
+    "network": 100,
+    "deprecated": 2,
+    "web": 86
+  },
+  "by_type": {
+    "Anomaly": 722,
+    "TTP": 1035,
+    "Hunting": 206,
+    "Correlation": 15
+  },
+  "by_status": {
+    "production": 1847,
+    "experimental": 129,
+    "deprecated": 2
+  },
+  "by_security_domain": {
+    "network": 258,
+    "identity": 98,
+    "threat": 157,
+    "access": 37,
+    "endpoint": 1406,
+    "audit": 22
+  },
+  "unique_mitre_techniques": 340,
+  "unique_analytic_stories": 334,
+  "unique_data_sources": 278
+}

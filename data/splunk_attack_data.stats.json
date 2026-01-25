@@ -1,0 +1,10 @@
+{
+  "version": "284dcf0",
+  "release_date": "2026-01-23",
+  "total_datasets": 1176,
+  "unique_mitre_techniques": 237,
+  "unique_data_sources": 51,
+  "unique_tags": 0,
+  "last_updated": "2026-01-23T14:43:36.766431+00:00",
+  "source": "https://github.com/splunk/attack_data"
+}

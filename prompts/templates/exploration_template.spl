@@ -1,0 +1,44 @@
+```spl
+| Comment: Data Source Exploration Template
+| Comment: Use to understand available data
+
+| Comment: Step 1 - Sample events from the data source
+index={INDEX} sourcetype={SOURCETYPE}
+    earliest=-24h latest=now
+| head 1000
+
+| Comment: Step 2 - Field summary
+| fieldsummary
+| where count > 10
+| sort - count
+| table field, count, distinct_count, is_exact, min, max, mean, stdev
+
+| Comment: --- Alternative: Event type distribution ---
+
+| Comment: index={INDEX} earliest=-24h
+| Comment: | stats count by sourcetype
+| Comment: | sort - count
+
+| Comment: --- Alternative: Time distribution ---
+
+| Comment: index={INDEX} sourcetype={SOURCETYPE} earliest=-7d
+| Comment: | bin _time span=1h
+| Comment: | stats count by _time
+| Comment: | timechart count
+
+| Comment: --- Alternative: Top values for a field ---
+
+| Comment: index={INDEX} sourcetype={SOURCETYPE} earliest=-24h
+| Comment: | top limit=20 {FIELD_NAME}
+
+| Comment: --- Alternative: Rare values (potential anomalies) ---
+
+| Comment: index={INDEX} sourcetype={SOURCETYPE} earliest=-24h
+| Comment: | rare limit=20 {FIELD_NAME}
+
+| Comment: --- Alternative: Field value correlation ---
+
+| Comment: index={INDEX} sourcetype={SOURCETYPE} earliest=-24h
+| Comment: | stats count by {FIELD1}, {FIELD2}
+| Comment: | sort - count
+```

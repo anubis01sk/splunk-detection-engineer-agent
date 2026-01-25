@@ -1,0 +1,44 @@
+```spl
+| Comment: Threat Hunting Query Template
+| Comment: Designed for exploratory analysis
+
+| Comment: Step 1 - Gather baseline data
+index={INDEX} sourcetype={SOURCETYPE}
+    earliest=-{TIME_RANGE} latest=now
+
+| Comment: Step 2 - Extract relevant fields
+| fields _time, {RELEVANT_FIELDS}
+
+| Comment: Step 3 - Initial filtering (optional)
+| where isnotnull({KEY_FIELD})
+
+| Comment: Step 4 - Statistical analysis
+| stats 
+    count,
+    dc({UNIQUE_FIELD}) as unique_count,
+    values({VALUE_FIELD}) as observed_values,
+    min(_time) as first_occurrence,
+    max(_time) as last_occurrence
+    by {GROUPING_FIELD}
+
+| Comment: Step 5 - Anomaly identification
+| eventstats 
+    avg(count) as avg_count,
+    stdev(count) as stdev_count
+
+| Comment: Step 6 - Flag outliers (3 sigma rule)
+| eval is_anomaly=if(count > (avg_count + 3*stdev_count), "yes", "no")
+| eval z_score=round((count - avg_count) / stdev_count, 2)
+
+| Comment: Step 7 - Focus on anomalies
+| where is_anomaly="yes" OR z_score > 2
+
+| Comment: Step 8 - Format for analysis
+| eval first_occurrence=strftime(first_occurrence, "%Y-%m-%d %H:%M:%S")
+| eval last_occurrence=strftime(last_occurrence, "%Y-%m-%d %H:%M:%S")
+
+| Comment: Step 9 - Output for review
+| table {GROUPING_FIELD}, count, avg_count, z_score, is_anomaly, 
+        unique_count, first_occurrence, last_occurrence
+| sort - z_score
+```

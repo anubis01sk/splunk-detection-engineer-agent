@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Splunk Detection Engineer Agent</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">SPL Agent</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="chat">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-text">Chat</span>
+                </a>
+                <a href="#" class="nav-item" data-view="search">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-text">Search RAGs</span>
+                </a>
+                <a href="#" class="nav-item" data-view="settings">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-status">
+                <h4>System Status</h4>
+                <div class="status-items">
+                    <div class="status-item" id="status-llm">
+                        <span class="status-dot"></span>
+                        <span class="status-label">LLM</span>
+                        <span class="status-value">--</span>
+                    </div>
+                    <div class="status-item" id="status-splunk">
+                        <span class="status-dot"></span>
+                        <span class="status-label">Splunk</span>
+                        <span class="status-value">--</span>
+                    </div>
+                    <div class="status-item" id="status-docs">
+                        <span class="status-dot"></span>
+                        <span class="status-label">SPL Docs</span>
+                        <span class="status-value">--</span>
+                    </div>
+                    <div class="status-item" id="status-detections">
+                        <span class="status-dot"></span>
+                        <span class="status-label">Detections</span>
+                        <span class="status-value">--</span>
+                    </div>
+                    <div class="status-item" id="status-cim">
+                        <span class="status-dot"></span>
+                        <span class="status-label">CIM Fields</span>
+                        <span class="status-value">--</span>
+                    </div>
+                    <div class="status-item" id="status-attack">
+                        <span class="status-dot"></span>
+                        <span class="status-label">Attack Data</span>
+                        <span class="status-value">--</span>
+                    </div>
+                </div>
+                <div class="token-usage" id="token-usage">
+                    <span class="token-label">Session Tokens:</span>
+                    <span class="token-value" id="token-count">0</span>
+                </div>
+                <div class="sidebar-option">
+                    <label class="option-toggle">
+                        <input type="checkbox" id="show-reasoning" checked>
+                        <span>🔍 Show Reasoning</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Chat View -->
+            <div class="view active" id="view-chat">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message assistant">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <p>Hello! I'm your Splunk Detection Engineer Agent. I can help you:</p>
+                                <ul>
+                                    <li>Generate SPL queries from natural language</li>
+                                    <li>Create detection rules for security events</li>
+                                    <li>Build IOC hunting queries from threat reports</li>
+                                    <li>Explore log sources and discover fields</li>
+                                </ul>
+                                <p><strong>Try one of these examples:</strong></p>
+                                
+                                <div class="example-category">
+                                    <h4>📋 Raw Log Queries</h4>
+                                    <p class="category-desc">Direct index/sourcetype searches using native fields</p>
+                                    <div class="example-queries">
+                                        <button class="example-query-btn" data-query="Detect brute force login attempts on Windows Security logs">
+                                            🔐 Brute Force Detection
+                                        </button>
+                                        <button class="example-query-btn" data-query="Find PowerShell commands downloading files from the internet using Sysmon">
+                                            ⚡ PowerShell Downloads
+                                        </button>
+                                        <button class="example-query-btn" data-query="Detect credential dumping from LSASS memory using Sysmon Event ID 10">
+                                            🔑 LSASS Credential Dumping
+                                        </button>
+                                        <button class="example-query-btn" data-query="Find executables created in Windows temp folders using Sysmon">
+                                            📁 Suspicious Temp Files
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="example-category">
+                                    <h4>🎯 CIM Data Model Queries</h4>
+                                    <p class="category-desc">Accelerated tstats searches using normalized CIM fields</p>
+                                    <div class="example-queries">
+                                        <button class="example-query-btn" data-query="Detect brute force login attempts using CIM Authentication data model with tstats">
+                                            🔐 CIM Brute Force
+                                        </button>
+                                        <button class="example-query-btn" data-query="Find suspicious process executions using CIM Endpoint.Processes data model">
+                                            ⚙️ CIM Process Hunting
+                                        </button>
+                                        <button class="example-query-btn" data-query="Detect network connections to known malicious ports using CIM Network Traffic data model">
+                                            🌐 CIM Network Anomalies
+                                        </button>
+                                        <button class="example-query-btn" data-query="Find file modifications in sensitive directories using CIM Endpoint.Filesystem data model">
+                                            📂 CIM File Changes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" data-mode="text">
+                                <span>💬</span> Text
+                            </button>
+                            <button class="mode-btn" data-mode="ioc">
+                                <span>📄</span> IOC Report
+                            </button>
+                            <button class="mode-btn" data-mode="e2e">
+                                <span>🔄</span> E2E Workflow
+                            </button>
+                        </div>
+                        
+                        <div class="input-area" id="input-text">
+                            <textarea 
+                                id="user-input" 
+                                placeholder="Describe what you want to detect, or enter a log source like 'index=windows sourcetype=WinEventLog:Security'..."
+                                rows="3"
+                            ></textarea>
+                            <button class="send-btn" id="send-btn">
+                                <span>Send</span>
+                                <span class="send-icon">→</span>
+                            </button>
+                        </div>
+                        
+                        <div class="input-area hidden" id="input-ioc">
+                            <div class="ioc-options">
+                                <input 
+                                    type="url" 
+                                    id="ioc-url" 
+                                    placeholder="Enter IOC report URL..."
+                                    class="ioc-url-input"
+                                >
+                                <span class="or-divider">or</span>
+                                <label class="file-upload-btn">
+                                    <input type="file" id="ioc-file" accept=".pdf,.html,.txt">
+                                    <span>📎 Upload PDF</span>
+                                </label>
+                            </div>
+                            <button class="send-btn" id="send-ioc-btn">
+                                <span>Process IOC</span>
+                                <span class="send-icon">→</span>
+                            </button>
+                        </div>
+                        
+                        <div class="input-area hidden" id="input-e2e">
+                            <div class="e2e-description">
+                                <p>🔄 <strong>End-to-End Workflow</strong>: IOC Report → Detection → Validation</p>
+                                <p class="e2e-subtitle">Complete pipeline from threat report to validated detection</p>
+                            </div>
+                            <div class="ioc-options">
+                                <input 
+                                    type="url" 
+                                    id="e2e-url" 
+                                    placeholder="Enter IOC report URL..."
+                                    class="ioc-url-input"
+                                >
+                                <span class="or-divider">or</span>
+                                <label class="file-upload-btn">
+                                    <input type="file" id="e2e-file" accept=".pdf,.html,.txt">
+                                    <span>📎 Upload PDF</span>
+                                </label>
+                            </div>
+                            <div class="e2e-options">
+                                <label class="e2e-checkbox">
+                                    <input type="checkbox" id="e2e-validate-splunk" checked>
+                                    <span>Validate with Splunk</span>
+                                </label>
+                                <label class="e2e-checkbox">
+                                    <input type="checkbox" id="e2e-test-attack" checked>
+                                    <span>Test with Attack Data</span>
+                                </label>
+                            </div>
+                            <button class="send-btn e2e-btn" id="send-e2e-btn">
+                                <span>Run Full Workflow</span>
+                                <span class="send-icon">🚀</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search View -->
+            <div class="view" id="view-search">
+                <div class="search-container">
+                    <h2>Search Knowledge Bases</h2>
+                    <p class="search-description">
+                        Search across SPL documentation, detection rules, CIM data models, and attack datasets.
+                    </p>
+                    
+                    <div class="search-form">
+                        <input 
+                            type="text" 
+                            id="search-query" 
+                            placeholder="Search for SPL commands, detection techniques, CIM fields..."
+                            class="search-input"
+                        >
+                        <select id="search-rag-type" class="search-select">
+                            <option value="all">All Sources</option>
+                            <option value="spl_docs">SPL Documentation</option>
+                            <option value="detections">Detection Rules</option>
+                            <option value="cim">CIM Data Models</option>
+                            <option value="attack_data">Attack Data</option>
+                        </select>
+                        <button class="search-btn" id="search-btn">Search</button>
+                    </div>
+                    
+                    <div class="search-results" id="search-results">
+                        <!-- Results will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings View -->
+            <div class="view" id="view-settings">
+                <div class="settings-container">
+                    <h2>Configuration</h2>
+                    
+                    <div class="settings-section">
+                        <h3>LLM Provider</h3>
+                        <div class="settings-form">
+                            <div class="form-group">
+                                <label for="llm-provider">Provider</label>
+                                <select id="llm-provider">
+                                    <option value="groq">Groq</option>
+                                    <option value="mistral">Mistral AI</option>
+                                    <option value="anthropic">Anthropic (Claude)</option>
+                                    <option value="openai">OpenAI</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="llm-api-key">API Key</label>
+                                <input type="password" id="llm-api-key" placeholder="Enter API key...">
+                            </div>
+                            <div class="form-group">
+                                <label for="llm-model">Model</label>
+                                <input type="text" id="llm-model" placeholder="e.g., llama-3.3-70b-versatile">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>Splunk Connection</h3>
+                        <div class="settings-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="splunk-host">Host</label>
+                                    <input type="text" id="splunk-host" placeholder="e.g., localhost">
+                                </div>
+                                <div class="form-group small">
+                                    <label for="splunk-port">Port</label>
+                                    <input type="number" id="splunk-port" placeholder="8089">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="splunk-token">Auth Token</label>
+                                <input type="password" id="splunk-token" placeholder="Enter Splunk token...">
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="splunk-verify-ssl" checked>
+                                    Verify SSL Certificate
+                                </label>
+                            </div>
+                            <button class="test-btn" id="test-splunk-btn">Test Connection</button>
+                            <span class="test-result" id="splunk-test-result"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button class="save-btn" id="save-config-btn">Save Configuration</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

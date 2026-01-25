@@ -1,0 +1,41 @@
+```spl
+| Comment: Detection Rule Template
+| Comment: Replace placeholders with actual values
+
+index={INDEX} sourcetype={SOURCETYPE}
+    earliest=-{TIME_RANGE} latest=now
+
+| Comment: Filter for relevant events
+| where {FILTER_CONDITION}
+
+| Comment: Aggregate by entity
+| stats 
+    count as event_count,
+    values({FIELD1}) as {FIELD1}_values,
+    dc({FIELD2}) as unique_{FIELD2},
+    earliest(_time) as first_seen,
+    latest(_time) as last_seen
+    by {GROUP_BY_FIELDS}
+
+| Comment: Apply detection threshold
+| where event_count >= {THRESHOLD}
+
+| Comment: Calculate severity
+| eval severity=case(
+    event_count >= {CRITICAL_THRESHOLD}, "critical",
+    event_count >= {HIGH_THRESHOLD}, "high",
+    event_count >= {MEDIUM_THRESHOLD}, "medium",
+    true(), "low"
+)
+
+| Comment: Format timestamps
+| eval first_seen=strftime(first_seen, "%Y-%m-%d %H:%M:%S")
+| eval last_seen=strftime(last_seen, "%Y-%m-%d %H:%M:%S")
+
+| Comment: Build alert message
+| eval alert_message="{ALERT_DESCRIPTION}: ".{ENTITY_FIELD}." with ".event_count." events"
+
+| Comment: Output relevant fields
+| table _time, severity, {ENTITY_FIELDS}, event_count, first_seen, last_seen, alert_message
+| sort - severity, - event_count
+```

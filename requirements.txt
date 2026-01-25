@@ -1,0 +1,109 @@
+# =============================================================================
+# Splunk SPL Agent - Python Dependencies
+# =============================================================================
+# Python Version: >= 3.10 (required for all packages)
+# Install with: pip install -r requirements.txt
+# Post-install: playwright install chromium
+# =============================================================================
+
+# =============================================================================
+# Web Scraping and Crawling
+# =============================================================================
+# BeautifulSoup: HTML/XML parsing with Pythonic API
+# Used by: splunk_scraper.py, splunk_crawler.py
+beautifulsoup4>=4.12.0
+
+# lxml: Fast XML/HTML parser, used as BeautifulSoup backend
+# Used by: splunk_scraper.py (via bs4 parser='lxml')
+# Note: Wheels bundle libxml2/libxslt, no system dependencies needed
+lxml>=5.0.0
+
+# Playwright: Browser automation for JavaScript-rendered pages
+# Used by: splunk_crawler.py, input_processor.py (URL fetching)
+# Post-install: playwright install chromium
+playwright>=1.40.0
+
+# =============================================================================
+# Vector Database and Embeddings
+# =============================================================================
+# ChromaDB: Persistent vector database (serverless, no external process)
+# Used by: splunk_rag_ingest.py, detection_rag.py
+# IMPORTANT: Pin to <0.6 to avoid breaking migrations between versions
+chromadb>=0.4.22,<0.6
+
+# Sentence Transformers: Embedding model interface
+# Used by: ChromaDB for BGE-small-en-v1.5 embeddings
+# Requires: torch >= 1.11.0 (torch >= 2.0 recommended)
+sentence-transformers>=2.3.0
+
+# =============================================================================
+# Machine Learning Runtime
+# =============================================================================
+# PyTorch: Required by sentence-transformers for embedding computation
+# Note: CPU-only version is sufficient for embedding generation
+# For GPU support, install separately: pip install torch --index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+
+# =============================================================================
+# LLM Providers
+# =============================================================================
+# Anthropic: Claude API client (Primary paid option)
+# Used by: llm_provider.py (ClaudeProvider)
+anthropic>=0.18.0
+
+# OpenAI: ChatGPT API client + OpenAI-compatible providers
+# Used by: llm_provider.py (OpenAI, Groq, Mistral, OpenRouter, Grok, DeepSeek)
+# The base_url parameter enables multi-provider support via OpenAI SDK
+openai>=1.12.0
+
+# =============================================================================
+# HTTP Client
+# =============================================================================
+# HTTPX: Async-capable HTTP client (used by both anthropic and openai SDKs)
+# Used by: splunk_client.py (Splunk REST API), llm_provider.py
+httpx>=0.26.0
+
+# =============================================================================
+# Configuration
+# =============================================================================
+# PyYAML: YAML parser for configuration files
+# Used by: config.yaml loading across all modules
+pyyaml>=6.0
+
+# =============================================================================
+# PDF Processing
+# =============================================================================
+# pdfplumber: PDF text and table extraction
+# Used by: input_processor.py (IOC report processing)
+# Note: No system dependencies required (uses pypdfium2 which bundles PDFium)
+pdfplumber>=0.10.0
+
+# =============================================================================
+# Web API Server
+# =============================================================================
+# FastAPI: Modern async web framework for building APIs
+# Used by: src/api/server.py
+fastapi>=0.100.0
+
+# Uvicorn: ASGI server for running FastAPI
+# Used by: Web UI server
+uvicorn>=0.23.0
+
+# Python-multipart: Required for file uploads in FastAPI
+# Used by: IOC PDF upload endpoint
+python-multipart>=0.0.6
+
+# Pydantic: Data validation (included with FastAPI, but explicit version for features)
+# Used by: API request/response models
+pydantic>=2.0.0
+
+# =============================================================================
+# Optional: Development Tools (uncomment if needed)
+# =============================================================================
+# pytest>=8.0.0              # Testing framework
+# pytest-asyncio>=0.23.0     # Async test support for Playwright tests
+# black>=24.0.0              # Code formatter
+# ruff>=0.2.0                # Fast linter (replaces pylint, flake8)
+# mypy>=1.8.0                # Static type checker
+# types-PyYAML>=6.0.0        # Type stubs for PyYAML
+# types-beautifulsoup4>=4.12.0  # Type stubs for BeautifulSoup

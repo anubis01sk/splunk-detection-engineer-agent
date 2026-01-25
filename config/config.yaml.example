@@ -1,0 +1,213 @@
+# =============================================================================
+# Splunk SPL Agent - Configuration Template
+# =============================================================================
+#
+# SETUP INSTRUCTIONS:
+# 1. Copy this file: cp config.yaml.example config.yaml
+# 2. Fill in your API keys and Splunk credentials below
+# 3. Keep config.yaml secure - it is excluded from git
+#
+# =============================================================================
+
+# Default provider to use
+# FREE options: groq, mistral, openrouter
+# PAID options: claude, openai, gemini, grok, deepseek, qwen
+provider: groq
+
+# =============================================================================
+# FREE PROVIDERS (No credit card required)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Groq (FREE - RECOMMENDED)
+# -----------------------------------------------------------------------------
+# FREE TIER: 14,400 requests/day on Llama 3.1 8B, blazing fast inference
+# No credit card required
+# Get your API key at: https://console.groq.com/
+groq:
+  api_key: ""  # YOUR_GROQ_API_KEY_HERE
+  model: "llama-3.3-70b-versatile"
+  base_url: "https://api.groq.com/openai/v1"
+  # Available models:
+  #   - llama-3.3-70b-versatile (recommended, 12K tokens/min free)
+  #   - llama-3.1-8b-instant (fastest, 14,400 req/day free)
+  #   - llama-3.1-70b-versatile (high quality)
+  #   - mixtral-8x7b-32768 (32K context)
+  #   - gemma2-9b-it (Google's model)
+
+# -----------------------------------------------------------------------------
+# Mistral (FREE - High Token Allowance)
+# -----------------------------------------------------------------------------
+# FREE TIER (Experiment plan): 1 billion tokens/month, ~500K tokens/min
+# Phone verification required. Data may be used for training.
+# Get your API key at: https://console.mistral.ai/
+mistral:
+  api_key: ""  # YOUR_MISTRAL_API_KEY_HERE
+  model: "mistral-small-latest"
+  base_url: "https://api.mistral.ai/v1"
+  # Available models:
+  #   - mistral-small-latest (recommended, fast)
+  #   - mistral-medium-latest (balanced)
+  #   - mistral-large-latest (most capable)
+  #   - codestral-latest (code-focused)
+  #   - open-mistral-7b (smallest)
+
+# -----------------------------------------------------------------------------
+# OpenRouter (FREE - Model Variety)
+# -----------------------------------------------------------------------------
+# FREE TIER: 50 requests/day at 20 RPM, access to 25+ free models
+# No credit card required. $10 purchase unlocks 1000 req/day on free models.
+# Get your API key at: https://openrouter.ai/
+openrouter:
+  api_key: ""  # YOUR_OPENROUTER_API_KEY_HERE
+  model: "meta-llama/llama-3.3-70b-instruct:free"
+  base_url: "https://openrouter.ai/api/v1"
+  # Available FREE models (append :free to model name):
+  #   - meta-llama/llama-3.3-70b-instruct:free (recommended)
+  #   - deepseek/deepseek-r1:free (reasoning)
+  #   - google/gemini-2.0-flash-exp:free (experimental)
+  #   - qwen/qwen3-coder-480b:free (code-focused)
+  #   - microsoft/phi-3-mini-128k-instruct:free (small, fast)
+
+# =============================================================================
+# PAID PROVIDERS
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Claude (Anthropic) - Primary Paid Option
+# -----------------------------------------------------------------------------
+# Get your API key at: https://console.anthropic.com/
+# Documentation: https://docs.anthropic.com/
+claude:
+  api_key: ""  # YOUR_CLAUDE_API_KEY_HERE
+  model: "claude-sonnet-4-20250514"
+  # Available models:
+  #   - claude-sonnet-4-20250514 (recommended for balance of speed/quality)
+  #   - claude-opus-4-0-20250514 (most capable, slower)
+  #   - claude-haiku-3-5-20250620 (fastest, lower cost)
+
+# -----------------------------------------------------------------------------
+# OpenAI (ChatGPT)
+# -----------------------------------------------------------------------------
+# Get your API key at: https://platform.openai.com/api-keys
+# Documentation: https://platform.openai.com/docs/
+openai:
+  api_key: ""  # YOUR_OPENAI_API_KEY_HERE
+  model: "gpt-4o"
+  # Available models:
+  #   - gpt-4o (recommended, multimodal)
+  #   - gpt-4o-mini (faster, lower cost)
+  #   - gpt-4-turbo (previous generation)
+  #   - o1 (reasoning model, slower)
+
+# -----------------------------------------------------------------------------
+# Gemini (Google)
+# -----------------------------------------------------------------------------
+# Get your API key at: https://aistudio.google.com/apikey
+# Documentation: https://ai.google.dev/docs
+# Note: Free tier was reduced ~92% in Dec 2024, now ~100 req/day
+gemini:
+  api_key: ""  # YOUR_GEMINI_API_KEY_HERE
+  model: "gemini-1.5-pro"
+  # Available models:
+  #   - gemini-1.5-pro (recommended, 1M context)
+  #   - gemini-1.5-flash (faster, lower cost)
+  #   - gemini-2.0-flash-exp (experimental)
+
+# -----------------------------------------------------------------------------
+# Grok (xAI) - PAID
+# -----------------------------------------------------------------------------
+# Get your API key at: https://console.x.ai/
+# Documentation: https://docs.x.ai/
+grok:
+  api_key: ""  # YOUR_GROK_API_KEY_HERE
+  model: "grok-2-latest"
+  base_url: "https://api.x.ai/v1"
+  # Available models:
+  #   - grok-2-latest (most capable)
+  #   - grok-2-mini (faster)
+
+# -----------------------------------------------------------------------------
+# DeepSeek - PAID
+# -----------------------------------------------------------------------------
+# Get your API key at: https://platform.deepseek.com/
+# Documentation: https://platform.deepseek.com/api-docs/
+deepseek:
+  api_key: ""  # YOUR_DEEPSEEK_API_KEY_HERE
+  model: "deepseek-chat"
+  base_url: "https://api.deepseek.com/v1"
+  # Available models:
+  #   - deepseek-chat (general purpose)
+  #   - deepseek-coder (code-focused)
+  #   - deepseek-reasoner (reasoning-focused)
+
+# -----------------------------------------------------------------------------
+# Qwen (Alibaba) - PAID
+# -----------------------------------------------------------------------------
+# Get your API key at: https://dashscope.console.aliyun.com/
+# Documentation: https://help.aliyun.com/zh/dashscope/
+qwen:
+  api_key: ""  # YOUR_QWEN_API_KEY_HERE
+  model: "qwen-plus"
+  # Available models:
+  #   - qwen-turbo (fastest)
+  #   - qwen-plus (balanced)
+  #   - qwen-max (most capable)
+
+# =============================================================================
+# Common Settings
+# =============================================================================
+settings:
+  # Maximum tokens in the response
+  max_tokens: 4096
+  
+  # Temperature (0.0 = deterministic, 1.0 = creative)
+  # Lower values recommended for code generation
+  temperature: 0.1
+  
+  # Number of retry attempts on failure
+  max_retries: 3
+  
+  # Delay between retries (seconds, multiplied by attempt number)
+  retry_delay: 1.0
+  
+  # Request timeout (seconds)
+  timeout: 120
+
+# =============================================================================
+# Splunk Connection Settings
+# =============================================================================
+splunk:
+  # Splunk server hostname or IP address
+  host: "your-splunk-host"  # e.g., "192.168.1.100" or "splunk.company.com"
+  
+  # Splunk management port (default 8089)
+  port: 8089
+  
+  # Authentication Option 1: Username/Password
+  username: "your-username"
+  password: "your-password"
+  
+  # Authentication Option 2: Token (preferred, takes precedence over username/password)
+  # Generate at Settings > Tokens in Splunk Web
+  # Leave empty to use username/password authentication
+  token: ""
+  
+  # Set to false if using self-signed certificates (common in lab environments)
+  verify_ssl: false
+
+# =============================================================================
+# RAG Settings
+# =============================================================================
+rag:
+  # Path to the SPL documentation vector database
+  spl_docs_db: "./spl_docs_vector_db"
+  
+  # Path to the detection rules vector database (Phase 3)
+  detections_db: "./spl_detections_db"
+  
+  # Number of documents to retrieve for context
+  top_k: 5
+  
+  # Embedding model (do not change unless re-ingesting)
+  embedding_model: "BAAI/bge-small-en-v1.5"
